@@ -22,6 +22,12 @@ function TodoList() {
     setDate('');
   }
 
+  const deleteTodo = (index) => {
+    const updateTodos = todos.filter((todo, i) => i !== index);
+    setTodos(updateTodos);
+
+  }
+
   return (
     <>
     <div className='todo-Container'>
@@ -34,10 +40,14 @@ function TodoList() {
         <tbody>
           <td className='descBox'>Description</td>
           <td className='dateBox'>Date</td>
+          
           {todos.map((todo, index) => (
             <tr key={index}>
               <td>{todo.description}</td>
               <td>{todo.date}</td>
+              <td>
+                <button onClick={() => deleteTodo(index)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
