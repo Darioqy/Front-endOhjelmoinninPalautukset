@@ -23,6 +23,12 @@ function TodoList() {
     setDate('');
   }
 
+  const deleteTodo = (index) => {
+    const updateTodos = todos.filter((todo, i) => i !== index);
+    setTodos(updateTodos);
+
+  }
+
   return (
     <>
       <div className='todo-Container'>
@@ -33,7 +39,7 @@ function TodoList() {
       </div>
       
       
-      <TodoTable todos={todos} />
+      <TodoTable todos={todos} deleteTodo={deleteTodo} />
     </>
   );
 }

@@ -1,6 +1,9 @@
 import React from 'react';
 
-function TodoTable({ todos }) {
+
+function TodoTable({ todos, deleteTodo }) {
+
+  
   return (
     <table className='todo-List'>
       <thead>
@@ -14,6 +17,9 @@ function TodoTable({ todos }) {
           <tr key={index}>
             <td>{todo.description}</td>
             <td>{todo.date}</td>
+            <td>
+                <button onClick={() => deleteTodo(index)}>Delete</button>
+              </td>
           </tr>
         ))}
       </tbody>
