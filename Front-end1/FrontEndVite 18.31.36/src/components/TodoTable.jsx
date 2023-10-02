@@ -1,29 +1,40 @@
-import React from 'react';
+
+import React, { useRef } from 'react';
+
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-material.css';
+
+
 
 
 function TodoTable({ todos, deleteTodo }) {
 
-  
+  const columns = [
+    { field: "description", filter: true, sortable: true, floatingFilter: true },
+    { field: "date", filter: true, sortable: true, floatingFilter: true },
+    { field: "priority", filter: true, sortable: true, floatingFilter: true }
+    
+  ];
+
+  const gridRef = useRef();
+
   return (
-    <table className='todo-List'>
-      <thead>
-        <tr>
-          <th className='descBox'>Description</th>
-          <th className='dateBox'>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        {todos.map((todo, index) => (
-          <tr key={index}>
-            <td>{todo.description}</td>
-            <td>{todo.date}</td>
-            <td>
-                <button onClick={() => deleteTodo(index)}>Delete</button>
-              </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+<div>
+    <div className="ag-theme-material"
+     style={{height: '700px', width: '70%', margin: 'auto'}} >
+    <AgGridReact
+        columnDefs={columns}
+        rowData={todos}
+        ref={gridRef}
+        onGridReady={ params => gridRef.current = params.api }
+        animateRows={true}
+        filter={true}
+        floatingFilter={true}>
+     </AgGridReact>
+</div>
+
+    </div>
   );
 }
 
